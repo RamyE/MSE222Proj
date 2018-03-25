@@ -8,8 +8,3 @@ mass = 0.05;
 initialV = spring (springK, springS1, springS2, mass);
 %the initial velocity in the X direction.
 % we will start our initial X after the spring distance
-
-
-%new comment
-%new comment 2
-%new comment 98
