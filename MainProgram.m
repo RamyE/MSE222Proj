@@ -1,6 +1,7 @@
 clc
 clear global;
 close all;
+clearvars;
 
 %This is a list of constants that is dependent on the design (START)
 % I am assuming standard metric units (metre, kg, second, N, etc...)
@@ -32,3 +33,20 @@ GlobalXYT = [GlobalXYT; tempXYT];
 initialV = spring (springK, springS1, springS2, mass);
 %the initial velocity in the X direction.
 %We will start our initial X after the spring distance
+
+
+
+
+%Impact Part
+%The initial conditions below is just asumption.
+angle_impact_slope = 30; %degrees
+global_time = 5; %When the impact start
+bouncing_time = 3; %seconds
+X_after_proj = 50;
+Y_after_proj = 80;
+Contact_velocity = 10; %m/s
+%Coefficient of restitution is the last input. Don't know how to calculate
+%it so I assumed it to be 0.63, which is the typical value of stainless
+%steel.
+[matrix] = Impact(angle_impact_slope,bouncing_time, X_after_proj,Y_after_proj,Contact_velocity, global_time,0.63); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
+GlobalXYT = [GlobalXYT; matrix];
