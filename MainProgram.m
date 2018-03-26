@@ -10,9 +10,7 @@ clearvars;
 initialX = 0.05; %Assuming arounf 5 cm from left - Value after the spring release position
 initialY = 0.27; %Assuming around 3 cm from top
 springK = 5;  %I don't what is its range or expected value
-springS1 = 0.02;
-springS2 = 0.035; %Assumed values given that S2 has to be larger than S1 (After spring is released)
-%S2 is also considered the spring equilibrium position
+springS = 0.035; %the difference between the speing equilibrium and the compression (compression length is S)
 mass = 0.05; %mass of the ball
 
 
@@ -30,7 +28,7 @@ tempXYT = [tempX',tempY',tempT'];
 GlobalXYT = [GlobalXYT; tempXYT];
 
 %determine the initial velocity after the spring
-initialV = spring (springK, springS1, springS2, mass);
+initialV = spring (springK, springS, mass);
 %the initial velocity in the X direction.
 %We will start our initial X after the spring distance
 
