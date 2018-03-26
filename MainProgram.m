@@ -1,5 +1,5 @@
 clc
-clear all;
+clear global;
 close all;
 
 %This is a list of constants that is dependent on the design (START)
@@ -26,7 +26,7 @@ tempX = [3,6,7,8,9];
 tempY = [45, 45,  67, 78, 66];
 tempT = [0.001,0.002,0.003,0.004,0.005];
 tempXYT = [tempX',tempY',tempT'];
-GlobalXYT = [GlobalXYT; tempXYT]
+GlobalXYT = [GlobalXYT; tempXYT];
 
 %determine the initial velocity after the spring
 initialV = spring (springK, springS1, springS2, mass);
