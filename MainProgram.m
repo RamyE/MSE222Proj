@@ -7,7 +7,7 @@ clearvars;
 % I am assuming standard metric units (metre, kg, second, N, etc...)
 
 
-initialX = 0.05; %Assuming arounf 5 cm from left - Value after the spring release position
+initialX = 0.05; %Assuming around 5 cm from left - Value after the spring release position
 initialY = 0.27; %Assuming around 3 cm from top
 springK = 5;  %I don't what is its range or expected value
 springS1 = 0.02;
@@ -50,3 +50,9 @@ Contact_velocity = 10; %m/s
 %steel.
 [matrix] = Impact(angle_impact_slope,bouncing_time, X_after_proj,Y_after_proj,Contact_velocity, global_time,0.63); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
 GlobalXYT = [GlobalXYT; matrix];
+
+%Projectile Part
+timeOfProjectile = 2; %arbitrary number for time in seconds for now
+projectileResults = projectile2(timeOfProjectile);
+GlobalXYT = [GlobalXYT; projectileResults];
+
