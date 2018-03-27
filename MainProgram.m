@@ -40,12 +40,10 @@ CurveRadius = 0.025;
 [x, y, time] = curve(theta1, theta2, CurveRadius); %function calling
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 
-
-
-
-
-
-
+%Projectile Part
+timeOfProjectile = 2; %arbitrary number for time in seconds for now
+projectileResults = projectile(timeOfProjectile);
+GlobalXYT = [GlobalXYT; projectileResults];
 
 %Impact Part
 %The initial conditions below is just asumption and geometry.
