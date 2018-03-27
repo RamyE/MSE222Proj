@@ -1,16 +1,23 @@
-function [x,y]= projectile(a,time,X,Y,v)
-% This is the old projectile code
-%       Good to use for testing projectile motion
-%       inputs: a=angle, X=x position, Y=y position, v=magnitude of velocity
+function [results]= projectile(time)
+% How to use this Function:
+%       This function takes in global time,X,Y 
+%       Use this function if there is a generated X,Y path already
+%       The results are the updated X,Y global coordinates and the
+%       time added to the global time
 
-x0=X;
-y0=Y;
-angle=a*(pi./180);
-velocity=v;
+global GlobalXYT;
+
+dtime = 0.001; %1 millisecond
+dposx=GlobalXYT(end,1)-GlobalXYT(end-1,1);
+dposy=GlobalXYT(end,2)-GlobalXYT(end-1,2);
+velx=dposx/dtime;
+vely=dposy/dtime;
 g=9.81;
-dtime = 0.001;
 t=0:dtime:time;
-x=x0+velocity*cos(angle)*t;
-y=y0+velocity*sin(angle)*t-(g*t.^2)/2;
+time=GlobalXYT(end,3)+t;
+x=GlobalXYT(end,1)+velx*t;
+y=GlobalXYT(end,2)+vely*t-(g*t.^2)/2;
+
+results = [x',y',time'];
 
 end
