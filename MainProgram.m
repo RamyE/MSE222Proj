@@ -21,9 +21,9 @@ global GlobalXYT;
 GlobalXYT = [initialX, initialY, 0];
 
 %EXAMPLE of how to caoncatenate to the global array a function results 
-tempX = [3,6,7,8,9];
-tempY = [45, 45,  67, 78, 66];
-tempT = [0.001,0.002,0.003,0.004,0.005];
+tempX = [3,6,7,0.3,0.5];
+tempY = [45, 45,  67, 0.3, 0.5];
+tempT = [0.001,0.002,0.003,0.1,2];
 tempXYT = [tempX',tempY',tempT'];
 GlobalXYT = [GlobalXYT; tempXYT];
 
@@ -34,11 +34,11 @@ initialV = spring (springK, springS, mass);
 
 %Curvature Part
 %The following constants are only dependent on the geometry of the design
-theta1= 45;
+theta1= -45;
 theta2 = 80;
 CurveRadius = 0.025;
-[x,y,time] = curve(theta1, theta2, CurveRadius); %function calling
-GlobalXYT = [GlobalXYT; [x,y,time]] %adding the results to the global array
+[x, y, time] = curve(theta1, theta2, CurveRadius); %function calling
+GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 
 %Impact Part
 %The initial conditions below is just asumption and geometry.
