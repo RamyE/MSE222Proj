@@ -7,7 +7,7 @@ function [x1,x2,y1,y2] = hor_bounce(m,r,delta_x,t1,t2,X,Y,v1,a1)
 x0 = X;
 %g=9.81;
 %N = m*g; %normal force
-I = 0.4*m*r.^2 + 0.5*m*(delta_x).^2; %mass moment of inetia
+I = 0.4*m*r.^2 + m*(delta_x).^2; %mass moment of inetia
 %delta_x: distance from rod joint to ball's centre of mass
 w1 = v1/r; %initial angular velocity
 
