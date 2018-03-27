@@ -1,7 +1,7 @@
 function [matrix]= Impact2(angle, time, X, Y, v, global_time, c)
 %Bounce functions are similiar to projtile function with decreasing
 %velocity after each bounce.
-%Time: The period the ball will bounce, estimated by experiment.
+%Time: The total time the ball takes to bounce in seconds
 matrix = [X,Y,global_time];
 x0=X;
 y0=Y;

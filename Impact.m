@@ -1,3 +1,6 @@
+%DO NOT USE.
+
+
 function [matrix]= Impact(angle,time,X,Y,v,global_time,c)
 %Bounce functions are similiar to projtile function with decreasing
 %velocity after each bounce.
