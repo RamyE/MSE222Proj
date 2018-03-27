@@ -31,4 +31,12 @@ while (t <= time)
         break; %Exit the function if velocity become too small to return accurate result.
     end
 end
+figure;
+plot(matrix(:,1), matrix(:,2), 'b')
+xlabel('X')
+ylabel('Y')
+xlim([0, 12])
+ylim([0, 12])
+title('Y versus X of Impact projectile')
+hold on
 end
