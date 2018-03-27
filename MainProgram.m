@@ -44,14 +44,13 @@ GlobalXYT = [GlobalXYT; [x,y,time]] %adding the results to the global array
 
 %Impact Part
 %The initial conditions below is just asumption.
-angle_impact_slope = 30; %degrees
+angle_impact_slope = 25; %degrees
 global_time = 5; %When the impact start
 bouncing_time = 3; %seconds
-X_after_proj = 50;
-Y_after_proj = 80;
-Contact_velocity = 10; %m/s
+X_after_proj = 1;
+Y_after_proj = 6;
+Contact_velocity = 14; %in/s
 %Coefficient of restitution is the last input. Don't know how to calculate
-%it so I assumed it to be 0.63, which is the typical value of stainless
-%steel.
-[matrix] = Impact(angle_impact_slope,bouncing_time, X_after_proj,Y_after_proj,Contact_velocity, global_time,0.63); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
+%it so I assumed it to be 0.5
+[matrix] = Impact2(angle_impact_slope,bouncing_time, X_after_proj,Y_after_proj,Contact_velocity, global_time,0.5); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
 GlobalXYT = [GlobalXYT; matrix];
