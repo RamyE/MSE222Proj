@@ -32,6 +32,13 @@ initialV = spring (springK, springS, mass);
 %the initial velocity in the X direction.
 %We will start our initial X after the spring distance
 
+%Curvature Part
+%The following constants are only dependent on the geometry of the design
+theta1= 45;
+theta2 = 80;
+CurveRadius = 0.025;
+[x,y,time] = curve(theta1, theta2, CurveRadius); %function calling
+GlobalXYT = [GlobalXYT; [x,y,time]] %adding the results to the global array
 
 
 
