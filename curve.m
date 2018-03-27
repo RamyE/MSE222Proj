@@ -4,12 +4,12 @@
   %the angle of the projectile
   %radius is for the curvature and not the ball
   %units is kg, m, rad, etc...
- dtheta = 0.0005; %change for more accuracy
+ dtheta = 0.001; %decrease for more accuracy
  
  %OVERRIDING function paramaters only for TESTING
- theta1=-20;
- theta2=20;
- radius=0.1;
+%  theta1=-45;
+%  theta2=70;
+%  radius=0.1;
  % ============================
  
  global GlobalXYT; %letting the function know about the global array
@@ -19,7 +19,7 @@
  
  theta1 = degtorad(theta1);
  theta2 = degtorad(theta2);
- theta = theta1:dtheta:theta2; %
+ theta = theta1:dtheta:theta2;
  
 
  chord = 2*radius*sin(dtheta/2); %length of the chord of the circle corresponding to dtheta
@@ -38,10 +38,12 @@
   Vinitial = V2; 
  end
  
- GlobalXYT = [GlobalXYT; [x,y,time]]
+ %GlobalXYT = [GlobalXYT; [x,y,time]];
+ 
  %ALL THE PLOTS BELOW ARE FOR TESTING ONLY
- plot(time)
- plot(x,y)
+ 
+ %plot(time)
+%  plot(x,y)
 % xlim([-0.2 0.2]);
 % ylim([-0.2 0.2]);
 %  xlabel(x);
