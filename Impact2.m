@@ -4,9 +4,9 @@ function [matrix]= Impact2(angle, time, X, Y, global_time, c)
 %Time: The total time the ball takes to bounce in seconds
 matrix = [X,Y,global_time];
 global GlobalXYT;
-Vx = (GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3))
-Vy = (GlobalXYT(end,2) - GlobalXYT(end-1,2))/(GlobalXYT(end,3) - GlobalXYT(end-1,3))
-velocity = sqrt(Vx.^2 + Vy.^2) %calculating the initial velocity from the last element data
+Vx = (GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3));
+Vy = (GlobalXYT(end,2) - GlobalXYT(end-1,2))/(GlobalXYT(end,3) - GlobalXYT(end-1,3));
+velocity = sqrt(Vx.^2 + Vy.^2); %calculating the initial velocity from the last element data
 x0=X;
 y0=Y;
 x=X;
@@ -35,12 +35,12 @@ while (t <= time)
         break; %Exit the function if velocity become too small to return accurate result.
     end
 end
-figure;
-plot(matrix(:,1), matrix(:,2), 'b')
-xlabel('X')
-ylabel('Y')
-xlim([0, 12])
-ylim([0, 12])
-title('Y versus X of Impact projectile')
-hold on
+%figure;
+%plot(matrix(:,1), matrix(:,2), 'b')
+%xlabel('X')
+%ylabel('Y')
+%xlim([0, 12])
+%ylim([0, 12])
+%title('Y versus X of Impact projectile')
+%hold on
 end

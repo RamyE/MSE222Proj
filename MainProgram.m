@@ -40,14 +40,20 @@ CurveRadius = 0.025;
 [x, y, time] = curve(theta1, theta2, CurveRadius); %function calling
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 
+
+
+
+
+
+
+
 %Impact Part
 %The initial conditions below is just asumption and geometry.
 angle_impact_slope = 25; %degrees
 global_time = 5; %When the impact start
-bouncing_time = 3; %The total time the ball takes to bounce in seconds
-X_after_proj = 1;
+bouncing_time = 3; %The total time the ball takes to bounce in seconds. Doesn't need to be accurate since the function will stop if the bounce velocity become too small.
+X_after_proj = 1; %Will replace with value from the Global Matrix later.
 Y_after_proj = 6;
-%Coefficient of restitution is the last input. Don't know how to calculate
-%it so I assumed it to be 0.5
+%Coefficient of restitution is the last input. Don't know how to calculate it so I assumed it to be 0.5
 [matrix] = Impact2(angle_impact_slope,bouncing_time, X_after_proj,Y_after_proj, global_time,0.5); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
 GlobalXYT = [GlobalXYT; matrix];
