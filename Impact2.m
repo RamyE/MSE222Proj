@@ -35,11 +35,11 @@ while (stop == false)
         y0=y;
         Vy = abs((Vy - g*landingtime)*c);
         Vx = Vx*c;
-        velocity=(sqrt((Vx^2) + (Vy^2)));
+        velocity=(sqrt((Vx^2) + (Vy^2))); %New bounce velocity
         contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
         landingtime = (2*velocity*sin(contact_angle + angle))/(g*cos(angle)); %Total time to complete 1 bounce
     end
-    if round(landingtime, 2) == 0
+    if round(landingtime, 3) == 0
         stop = true;
         break; %Exit the function if the flying time become too small.
     end
