@@ -1,6 +1,5 @@
 function [slopeResults] = slope(a,distance)
 % Uses Newtons - Kinematics and Kinetic
-%calc v0
 
 global GlobalXYT;
 
@@ -22,10 +21,10 @@ initialVelX = magnitudeOfVel*cos(angle);  %change velx so that ball enters in di
 initialVelY = magnitudeOfVel*sin(angle);  %change vely so that ball enters in direction of slope
 
 syms T
-eqn = 0.5*g*T^2+initialVelX*T-slopeLength; %from kinematics
+eqn = 0.5*g*T^2+initialVelX*T-slopeLength==0; %from kinematics
 solT=double(solve(eqn,T));
 time=solT(solT>0);
-t=0:dtime:time;
+t=0:dtime:2;
 
 x=x0+initialVelX*t+(1/2)*accelX*t.^2;
 y=y0+initialVelY*t+(1/2)*accelY*t.^2;

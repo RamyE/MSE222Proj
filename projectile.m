@@ -25,7 +25,7 @@ eqn= 0.5*g*T^2+( vely+0.5*velx )*T+( y0-0.39+0.5*x0 )==0;
 solT=solve(eqn,T);
 time=double(solT);
 calulatedTime=time(time>0);
-t=0:dtime:calulatedTime;
+t=0:dtime:1;
 
 time=GlobalXYT(end,3)+t;
 x=x0+velx*t;
