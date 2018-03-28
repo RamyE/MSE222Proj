@@ -20,7 +20,7 @@
  s = S1:ds:Se;
  
  time = 0 + GlobalXYT(end,3); %initialzing the the time with the last value of time from the last element
- x = GlobalXYT(end,1) + chord*cos(theta1); %initialzing the x in the global coordinates
+ x = GlobalXYT(end,1); %initialzing the x in the global coordinates
  % x = 0; time = 0;
  for i = s(1:end-1)
   V2 = sqrt( (Vinitial.^2) + ((5*K)/(7*m))* ( (Se-i).^2 - (Se-i-ds).^2 ) );
@@ -30,10 +30,10 @@
   Vinitial = V2; 
  end
   
+ y= ones(length(x), 1)* GlobalXYT(end,2);
  %GlobalXYT = [GlobalXYT; [x,y,time]];
- 
  %ALL THE PLOTS BELOW ARE FOR TESTING ONLY
- 
+
  %plot(time)
 % plot(time,x)
 % xlim([-0.2 0.2]);
