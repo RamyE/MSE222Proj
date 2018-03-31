@@ -1,9 +1,14 @@
-function [result]= Impact2(angle, X, Y, global_time, c)
+function [result]= Impact_down(angle, X, Y, global_time, c)
 %Bounce functions are similiar to projtile function with decreasing
 %velocity after each bounce.
 %Time: The total time the ball takes to bounce in seconds
 result = [X,Y,global_time];
 global GlobalXYT;
+g=9.81;
+localtime = 0;
+timejump = 0.001; %Time step size is 1 ms
+t= 0.000;
+stop = false;
 Vx = abs((GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)));
 Vy = abs((GlobalXYT(end,2) - GlobalXYT(end-1,2))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)));
 velocity = sqrt(Vx.^2 + Vy.^2); %calculating the initial velocity from the last element data
@@ -15,12 +20,8 @@ angle=angle*(pi./180); %slope angle
 velocity=3*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
 Vx = velocity*cos((pi/2)-2*angle);
 Vy = velocity*sin((pi/2)-2*angle);
-g=9.81;
-localtime = 0;
-timejump = 0.001; %Time step size is 1 ms
-t= 0.000;
-stop = false;
-landingtime = (2*velocity*sin(pi/2 - angle))/(g*cos(angle)); %Total time to complete 1st bounce
+contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
+landingtime = (2*velocity*sin(contact_angle + angle))/(g*cos(angle)); %Total time to complete 1 bounce
 while (stop == false) 
     
     if (localtime <= landingtime) %This check whether or not a bounce is completed and move to a new bounce.
@@ -50,7 +51,7 @@ xlabel('X')
 ylabel('Y')
 xlim([0, 12])
 ylim([-30, 12])
-title('Y versus X of Impact projectile')
+title('Y versus X of Impact Bounce Projectile')
 grid on
 grid minor
 hold on

@@ -49,5 +49,7 @@ GlobalXYT = [GlobalXYT; projectileResults];
 %The initial conditions below is just asumption and geometry.
 angle_impact_slope = 25; %degrees
 %Coefficient of restitution is the last input. Don't know how to calculate it so I assumed it to be 0.5
-[result] = Impact2(angle_impact_slope, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.5); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
+[result] = Impact_down(angle_impact_slope, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.5); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
+GlobalXYT = [GlobalXYT; result];
+[result] = Impact_up(12, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
 GlobalXYT = [GlobalXYT; result];
