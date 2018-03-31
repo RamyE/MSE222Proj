@@ -7,12 +7,12 @@ clearvars;
 % I am assuming standard metric units (metre, kg, second, N, etc...)
 
 
-initialXafterSpring = 0.05; %Assuming arounf 5 cm from left - Value after the spring release position
+initialXafterSpring = 0.0475; %the actual value from left - Value after the spring release position
 SE = initialXafterSpring;
-initialX = 0.03;
-initialY = 0.27; %Assuming around 3 cm from top
+initialX = 0.045; %assuming compression of 2.5 millimetres
+initialY = 0.2325; %The actual value from the bottom in the prototype
 springK = 5;  %I don't what is its range or expected value
-springS = 0.035; %the difference between the speing equilibrium and the compression (compression length is S)
+% springS = 0.035; %the difference between the spring equilibrium and the compression (compression length is S)
 mass = 0.05; %mass of the ball
 
 
