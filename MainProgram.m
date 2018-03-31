@@ -9,9 +9,9 @@ clearvars;
 
 initialXafterSpring = 0.0475; %the actual value from left - Value after the spring release position
 SE = initialXafterSpring;
-initialX = 0.045; %assuming compression of 2.5 millimetres
+initialX = 0.035; %assuming compression of 3.5 millimetres
 initialY = 0.2325; %The actual value from the bottom in the prototype
-springK = 5;  %I don't what is its range or expected value
+springK = 20;  %I don't what is its range or expected value
 % springS = 0.035; %the difference between the spring equilibrium and the compression (compression length is S)
 mass = 0.05; %mass of the ball
 
@@ -33,6 +33,10 @@ GlobalXYT = [initialX, initialY, 0];
 [x, y, time] = springDetail(initialX, SE, springK, mass); %function calling
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 
+%Horizontal Part
+horizontalResults=slope(0,0.195)
+GlobalXYT = [GlobalXYT; horizontalResults];
+%%
 %Curvature Part
 %The following constants are only dependent on the geometry of the design
 theta1= -45;
