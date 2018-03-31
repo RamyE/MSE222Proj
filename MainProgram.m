@@ -34,9 +34,8 @@ GlobalXYT = [initialX, initialY, 0];
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 
 %Horizontal Part
-horizontalResults=slope(0,0.195)
+horizontalResults=slope(0,0.195);
 GlobalXYT = [GlobalXYT; horizontalResults];
-%%
 %Curvature Part
 %The following constants are only dependent on the geometry of the design
 theta1= -45;
