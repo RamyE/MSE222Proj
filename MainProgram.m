@@ -1,16 +1,18 @@
-clc
 clear global;
 close all;
+clc
 clearvars;
 
 %This is a list of constants that is dependent on the design (START)
 % I am assuming standard metric units (metre, kg, second, N, etc...)
 
 
-initialX = 0.05; %Assuming arounf 5 cm from left - Value after the spring release position
-initialY = 0.27; %Assuming around 3 cm from top
-springK = 5;  %I don't what is its range or expected value
-springS = 0.035; %the difference between the speing equilibrium and the compression (compression length is S)
+initialXafterSpring = 0.0475; %the actual value from left - Value after the spring release position
+SE = initialXafterSpring;
+initialX = 0.035; %assuming compression of 3.5 millimetres
+initialY = 0.2325; %The actual value from the bottom in the prototype
+springK = 20;  %I don't what is its range or expected value
+% springS = 0.035; %the difference between the spring equilibrium and the compression (compression length is S)
 mass = 0.05; %mass of the ball
 
 
@@ -21,17 +23,20 @@ global GlobalXYT;
 GlobalXYT = [initialX, initialY, 0];
 
 %EXAMPLE of how to caoncatenate to the global array a function results 
-tempX = [3,6,7,0.3,0.5];
-tempY = [45, 45,  67, 0.3, 0.5];
-tempT = [0.001,0.002,0.003,0.1,2];
-tempXYT = [tempX',tempY',tempT'];
-GlobalXYT = [GlobalXYT; tempXYT];
+%         tempX = [3,6,7,0.3,0.5];
+%         tempY = [45, 45,  67, 0.3, 0.5];
+%         tempT = [0.001,0.002,0.003,0.1,2];
+%         tempXYT = [tempX',tempY',tempT'];
+%         GlobalXYT = [GlobalXYT; tempXYT];
 
-%determine the initial velocity after the spring
-initialV = spring (springK, springS, mass);
-%the initial velocity in the X direction.
-%We will start our initial X after the spring distance
+%Spring Part
+[x, y, time] = springDetail(initialX, SE, springK, mass); %function calling
+GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 
+%Horizontal Part
+horizontalResults=slope(0,0.195)
+GlobalXYT = [GlobalXYT; horizontalResults];
+%%
 %Curvature Part
 %The following constants are only dependent on the geometry of the design
 theta1= -45;
