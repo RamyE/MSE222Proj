@@ -9,8 +9,9 @@ localtime = 0;
 timejump = 0.001; %Time step size is 1 ms
 t= 0.000;
 stop = false;
-Vx = abs((GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)))*c
-Vy = abs((GlobalXYT(end,2) - GlobalXYT(end-1,2))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)))*c
+angle=angle*(pi./180); %slope angle
+Vx = abs((GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)))*c;
+Vy = abs((GlobalXYT(end,2) - GlobalXYT(end-1,2))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)))*c;
 velocity = sqrt(Vx.^2 + Vy.^2); %calculating the initial velocity from the last element data
 x0=X;
 y0=Y;
@@ -20,14 +21,13 @@ y=Y;
 
 
 % Dummy Value
-angle=angle*(pi./180); %slope angle
-velocity=24*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
-Vx = velocity*cos(49*(pi./180)); %Real contact will be acot(vx/vy) + 2*angle
+velocity=5*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
+Vx = velocity*cos(49*(pi./180)); 
 Vy = velocity*sin(49*(pi./180));
 
 
 
-
+%Real contact will be acot(vx/vy) + 2*angle, not the one below.
 contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
 landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
 while (stop == false) 
@@ -43,22 +43,24 @@ while (stop == false)
         x0=x;
         y0=y;
         Vy = -(Vy - g*landingtime)*c;
-        Vx = Vx*c;
+        Vx = Vx;
         velocity=(sqrt((Vx^2) + (Vy^2))); %New bounce velocity
-        final_vel = velocity/c;
+        final_vel = velocity/c
         contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
         landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
     end
     if (contact_angle - angle) <= 0
         stop = true;
-        break; %Exit the function if the flying time become too small.
+        break; %Exit the function if the contact angle become to close to slope angle.
     end
 end
 figure;
 plot(result(:,1), result(:,2), 'r')
 xlabel('X')
 ylabel('Y')
-title('Y versus X of Impact Bounce Projectile')
+%xlim([-30, 12])
+%ylim([-30, 12])
+title('Y versus X of Impact-up Bounce Projectile')
 grid on
 grid minor
 hold on
