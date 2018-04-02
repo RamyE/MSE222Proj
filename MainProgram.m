@@ -10,10 +10,10 @@ clearvars;
 initialXafterSpring = 0.0475; %the actual value from left - Value after the spring release position
 SE = initialXafterSpring;
 initialX = 0.035; %assuming compression of 3.5 millimetres
-initialY = 0.2325; %The actual value from the bottom in the prototype
+initialY = 0.2443; %The actual value from the bottom in the prototype
 springK = 13.2;  %I don't what is its range or expected value
 % springS = 0.035; %the difference between the spring equilibrium and the compression (compression length is S)
-mass = 0.05; %mass of the ball
+mass = 0.0207; %mass of the ball
 
 
 % Constants List (END)
