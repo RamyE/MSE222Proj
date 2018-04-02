@@ -1,4 +1,4 @@
-function [result]= Impact_up(angle, X, Y, global_time, c)
+function [result]= Impact_up_left(angle, X, Y, global_time, c)
 %Bounce functions are similiar to projtile function with decreasing
 %velocity after each bounce.
 %Time: The total time the ball takes to bounce in seconds
@@ -9,27 +9,21 @@ localtime = 0;
 timejump = 0.001; %Time step size is 1 ms
 t= 0.000;
 stop = false;
-angle=angle*(pi./180); %slope angle
-Vx = abs((GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)))*c;
-Vy = abs((GlobalXYT(end,2) - GlobalXYT(end-1,2))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)))*c;
+Vx = c*abs((GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3))); %Use this for real model.
+Vy = c*abs((GlobalXYT(end,2) - GlobalXYT(end-1,2))/(GlobalXYT(end,3) - GlobalXYT(end-1,3)));
 velocity = sqrt(Vx.^2 + Vy.^2); %calculating the initial velocity from the last element data
 x0=X;
 y0=Y;
 x=X;
 y=Y;
-
-
-
-% Dummy Value
-velocity=5*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
-Vx = velocity*cos(49*(pi./180)); 
-Vy = velocity*sin(49*(pi./180));
-
-
-
-%Real contact will be acot(vx/vy) + 2*angle, not the one below.
-contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
-landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
+angle=angle*(pi./180); %slope angle
+%Dummy Value
+velocity=15*c; %I will use this dummy value for the time being.
+Vx = -velocity*cos((pi/180)*80); %Positive for downward bounce.
+Vy = velocity*sin((pi/180)*80);
+%End dummy value
+contact_angle = acot(abs(Vx)/Vy); %Contact angle change after each bounce.
+landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce. Change minus to plus for downward bounce.
 while (stop == false) 
     
     if (localtime <= landingtime) %This check whether or not a bounce is completed and move to a new bounce.
@@ -42,28 +36,25 @@ while (stop == false)
         localtime=0;
         x0=x;
         y0=y;
-        Vy = -(Vy - g*landingtime)*c;
-        Vx = Vx;
+        Vy = abs((Vy - g*landingtime)*c);
+        Vx = Vx*c;
         velocity=(sqrt((Vx^2) + (Vy^2))); %New bounce velocity
-        final_vel = velocity/c
         contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
-        landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
+        landingtime = (2*velocity*sin(contact_angle + angle))/(g*cos(angle)); %Total time to complete 1 bounce
     end
-    if (contact_angle - angle) <= 0
+    if round(landingtime, 2) == 0
         stop = true;
-        break; %Exit the function if the contact angle become to close to slope angle.
+        break; %Exit the function if the flying time become too small.
     end
 end
 figure;
-plot(result(:,1), result(:,2), 'r')
+plot(result(:,1), result(:,2), 'b')
 xlabel('X')
 ylabel('Y')
-%xlim([-30, 12])
-%ylim([-30, 12])
-title('Y versus X of Impact-up Bounce Projectile')
+xlim([0.1, 12])
+ylim([0, 12])
+title('According to the slow motion video. The ball is bouncing up.')
 grid on
 grid minor
 hold on
 end
-
-

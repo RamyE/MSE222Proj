@@ -47,7 +47,7 @@ GlobalXYT = [GlobalXYT; horizontalResults];
 
 %Projectile Part
 projectileResults = projectile();
-GlobalXYT = [GlobalXYT; projectileResults];
+GlobalXYT = [GlobalXYT; projectileResults]
 
 %Impact Part
 %The initial conditions below is just asumption and geometry.
