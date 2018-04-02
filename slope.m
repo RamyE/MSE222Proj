@@ -1,6 +1,6 @@
 function [slopeResults] = slope(a,distance)
 % Uses Newtons - Kinematics and Kinetic
-%calc v0
+%   Input Arguments are slope(ANGLE,LENGTH OF SLOPE)
 
 global GlobalXYT;
 
