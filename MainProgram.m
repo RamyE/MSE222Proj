@@ -69,6 +69,13 @@ GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 projectileResults = projectile()
 GlobalXYT = [GlobalXYT; projectileResults];
 
+%Impact Part
+%The initial conditions below is just asumption and geometry.
+angle_impact_slope = 25; %degrees
+%Coefficient of restitution is the last input. I assumed it to be 0.5
+[result] = Impact_up_left(angle_impact_slope, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
+GlobalXYT = [GlobalXYT; result];
+
 elapsedTime=GlobalXYT(end,3)
 figure;
 % subplot(1,2,1)
@@ -95,23 +102,7 @@ plot(v,vy)
 title('Vy wrt Vx')
 
 
-%Impact Part
-%The initial conditions below is just asumption and geometry.
-angle_impact_slope = 25; %degrees
-%Coefficient of restitution is the last input. I assumed it to be 0.5
-[result] = Impact_up_left(angle_impact_slope, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
-GlobalXYT = [GlobalXYT; result];
+
 %Up slope impact. Debug only.
 [result2] = Impact_up_right(12, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2);
 GlobalXYT = [GlobalXYT; result2];
-figure;
-plot(GlobalXYT(:,1), GlobalXYT(:,2), 'c')
-xlabel('X')
-ylabel('Y')
-xlim([-0.1, 12])
-ylim([0, 12])
-title('Y versus X of Impact-up Bounce Projectile')
-grid on
-grid minor
-pbaspect([1 1 1])
-hold on

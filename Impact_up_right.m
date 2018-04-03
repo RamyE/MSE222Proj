@@ -52,17 +52,6 @@ while (stop == false)
         break; %Exit the function if the contact angle become to close to slope angle.
     end
 end
-figure;
-plot(result(:,1), result(:,2), 'r')
-xlabel('X')
-ylabel('Y')
-xlim([0.1, 12])
-ylim([0, 12])
-title('Y versus X of Impact-up Bounce Projectile')
-grid on
-grid minor
-pbaspect([1 1 1])
-hold on
 end
 
 
