@@ -32,7 +32,7 @@ GlobalXYT = [initialX, initialY, 0];
 %Spring Part
 [x, y, time] = springDetail(initialX, SE, springK, mass); %function calling
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
-%%
+
 %Horizontal Part
 horizontalResults=slope(0,0.198);
 GlobalXYT = [GlobalXYT; horizontalResults];
@@ -50,7 +50,11 @@ projectileResults = projectile();
 GlobalXYT = [GlobalXYT; projectileResults];
 
 elapsedTime=GlobalXYT(end,3)
-%%
+
+
+
+
+
 %Impact Part
 %The initial conditions below is just asumption and geometry.
 angle_impact_slope = 25; %degrees
