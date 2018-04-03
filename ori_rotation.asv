@@ -1,5 +1,6 @@
-function [result3] = ori_rotation(mb,mr,rb,l,v1)
+function [result] = ori_rotation(mb,mr,rb,l,v1)
 global GlobalXYT;
+% result = [GlobalXYT(end,1), GlobalXYT(end,2)]; 
 %mb: ball mass
 %mr: rod mass
 %rb: ball radius
@@ -39,5 +40,5 @@ x = x0 + l.*sin(theta);
 y = y0 + 2*l.*(sin(theta/2)).^2;
 time = GlobalXYT(end,3)+ t;
 
-result3 = [x' y' time'];
+result = [result; x y t];
 end

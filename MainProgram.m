@@ -37,14 +37,22 @@ GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 horizontalResults=slope(0,0.207);
 GlobalXYT = [GlobalXYT; horizontalResults];
 %Rotation Part
-[x,y,t] = ori_rotation(0.05,0.005,0.0125,0.06,0.3)
-GlobalXYT = [GlobalXYT; [x', y', t']];
+[result3] = ori_rotation(0.05,0.005,0.0125,0.06,0.3);
+GlobalXYT = [GlobalXYT; result3];
+% figure;
+% plot(result3(:,1),result3(:,2))
+% xlabel('X')
+% ylabel('Y')
+% hold on
+%Freefall Part
+[result4] = freefall();
+GlobalXYT = [GlobalXYT; result4];
 figure;
-plot(x',y')
+plot(GlobalXYT(:,1),GlobalXYT(:,2),'b')
 xlabel('X')
 ylabel('Y')
+title('Ball motion after free fall')
 hold on
-
 % %Curvature Part
 % %The following constants are only dependent on the geometry of the design
 % theta1= -45;
@@ -61,8 +69,8 @@ GlobalXYT = [GlobalXYT; projectileResults];
 %The initial conditions below is just asumption and geometry.
 angle_impact_slope = 25; %degrees
 %Coefficient of restitution is the last input. I assumed it to be 0.5
-[result] = Impact_down(angle_impact_slope, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
-GlobalXYT = [GlobalXYT; result];
+[result3] = Impact_down(angle_impact_slope, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2); %Output is in a 3 matrix-columns matrix (x,y,t). Can add into a global array later.
+GlobalXYT = [GlobalXYT; result3];
 %Up slope impact. Debug only.
 [result2] = Impact_up(12, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2);
 GlobalXYT = [GlobalXYT; result2];
