@@ -51,7 +51,9 @@ figure;
 plot(GlobalXYT(:,1),GlobalXYT(:,2),'b')
 xlabel('X')
 ylabel('Y')
-title('Ball motion after free fall')
+title('Ball motion until free fall')
+grid on
+grid minor
 hold on
 % %Curvature Part
 % %The following constants are only dependent on the geometry of the design
