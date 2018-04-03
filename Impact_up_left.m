@@ -18,7 +18,7 @@ x=X;
 y=Y;
 angle=angle*(pi./180); %slope angle
 %Dummy Value
-velocity=15*c; %I will use this dummy value for the time being.
+velocity=10*c; %I will use this dummy value for the time being.
 Vx = -velocity*cos((pi/180)*80); %Positive for downward bounce.
 Vy = velocity*sin((pi/180)*80);
 %End dummy value

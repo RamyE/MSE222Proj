@@ -18,8 +18,6 @@ y0=Y;
 x=X;
 y=Y;
 
-
-
 % Dummy Value
 velocity=15*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
 Vx = velocity*cos(49*(pi./180)); 
@@ -63,6 +61,7 @@ ylim([0, 12])
 title('Y versus X of Impact-up Bounce Projectile')
 grid on
 grid minor
+pbaspect([1 1 1])
 hold on
 end
 
