@@ -32,25 +32,72 @@ GlobalXYT = [initialX, initialY, 0];
 %Spring Part
 [x, y, time] = springDetail(initialX, SE, springK, mass); %function calling
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
-%%
+
 %Horizontal Part
 horizontalResults=slope(0,0.198);
 GlobalXYT = [GlobalXYT; horizontalResults];
 
-% %Curvature Part
-% %The following constants are only dependent on the geometry of the design
-% theta1= -45;
-% theta2 = 80;
-% CurveRadius = 0.025;
-% [x, y, time] = curve(theta1, theta2, CurveRadius); %function calling
-% GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
+% Rotation Part
+[result3] = ori_rotation(0.05,0.005,0.0125,0.06,0.3);
+GlobalXYT = [GlobalXYT; result3];
 
-%Projectile Part
-projectileResults = projectile();
+%Freefall Part
+[result4] = freefall();
+GlobalXYT = [GlobalXYT; result4];
+
+loseEnergy();
+
+% subplot(1,2,2)
+% v = diff(GlobalXYT(1:end,1))./ diff(GlobalXYT(1:end,3));
+% vy = diff(GlobalXYT(1:end,2))./ diff(GlobalXYT(1:end,3));
+% plot(v,vy)
+% title('Vy wrt Vx')
+
+%Slope before curvature Part
+slopeResults=slope(156,0.13325);
+GlobalXYT = [GlobalXYT; slopeResults];
+
+%Curvature Part
+%The following constants are only dependent on the geometry of the design
+theta1= -24.36;
+theta2 = 61.26;
+CurveRadius = 0.048;
+[x, y, time] = curve(theta1, theta2, CurveRadius); %function calling
+GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
+
+elapsedTime=GlobalXYT(end,3)
+figure;
+% subplot(1,2,1)
+x = GlobalXYT(:, 1);
+y = GlobalXYT(:, 2);
+plot(x, y);
+title('Y wrt X')
+xlim([0,0.3048])
+ylim([0,0.3048])
+%%
+
+%projectile part after curvature
+projectileResults = projectile()
 GlobalXYT = [GlobalXYT; projectileResults];
 
 elapsedTime=GlobalXYT(end,3)
+figure;
+subplot(1,2,1)
+x = GlobalXYT(:, 1);
+y = GlobalXYT(:, 2);
+plot(x, y);
+title('Y wrt X')
+xlim([0,0.3048])
+ylim([0,0.3048])
+subplot(1,2,2)
+v = diff(GlobalXYT(1:end,1))./ diff(GlobalXYT(1:end,3));
+vy = diff(GlobalXYT(1:end,2))./ diff(GlobalXYT(1:end,3));
+plot(v,vy)
+title('Vy wrt Vx')
+
+
 %%
+
 %Impact Part
 %The initial conditions below is just asumption and geometry.
 angle_impact_slope = 25; %degrees

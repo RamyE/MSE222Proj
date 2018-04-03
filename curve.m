@@ -24,12 +24,12 @@
 
  chord = 2*radius*sin(dtheta/2); %length of the chord of the circle corresponding to dtheta
  time = 0 + GlobalXYT(end,3); %initialzing the the time with the last value of time from the last element
- x = GlobalXYT(end,1) + chord*cos(theta1); %initialzing the x in the global coordinates
+ x = GlobalXYT(end,1) + chord*-cos(theta1); %initialzing the x in the global coordinates
  y = GlobalXYT(end,2) + chord*sin(theta1); %initialzing the y in the global coordinates
  
  for i = theta(1:end-1)
   V2 = sqrt( (Vinitial.^2) +(10/7)*9.81*radius*(cos(i+dtheta)-cos(i)));
-  dx = chord*cos(i+dtheta); %x distance moved through the dtheta 
+  dx = chord*-cos(i+dtheta); %x distance moved through the dtheta 
   dy = chord*sin(i+dtheta); %y distance moved through the dtheta
   [x] = [x; x(end)+dx]; %adding the increased dx 
   [y] = [y; y(end)+dy]; %adding the increased dy 

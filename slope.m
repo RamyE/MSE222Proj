@@ -14,7 +14,7 @@ dtime=0.001;
 
 acceleration = g*( sin(angle)-coefFriction*cos(angle) );
 accelX=acceleration*cos(angle);
-accelY=acceleration*sin(angle);
+accelY=-acceleration*sin(angle);
 initialVelX=(GlobalXYT(end,1)-GlobalXYT(end-4,1))/(GlobalXYT(end,3)-GlobalXYT(end-4,3));
 initialVelY=(GlobalXYT(end,2)-GlobalXYT(end-4,2))/(GlobalXYT(end,3)-GlobalXYT(end-4,3));
 magnitudeOfVel = sqrt( initialVelX^2 + initialVelY^2 );
