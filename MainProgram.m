@@ -45,7 +45,7 @@ GlobalXYT = [GlobalXYT; result3];
 [result4] = freefall();
 GlobalXYT = [GlobalXYT; result4];
 
-loseEnergy();
+loseEnergy(); %Assuming that the ball loses all its energy at hitting the slope after the free fall
 
 % subplot(1,2,2)
 % v = diff(GlobalXYT(1:end,1))./ diff(GlobalXYT(1:end,3));
