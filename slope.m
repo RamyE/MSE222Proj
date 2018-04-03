@@ -9,7 +9,7 @@ y0=GlobalXYT(end,2);
 g = 9.81;
 slopeLength = distance;
 angle = a*(pi./180);
-coefFriction = 0.007;   %needs to change
+coefFriction = 0.01;   %needs to change
 dtime=0.001;
 
 acceleration = g*( sin(angle)-coefFriction*cos(angle) );
