@@ -17,7 +17,7 @@ syms v2 vr2
 %vr2: rod velocity after impact with ball
 I = (1/3)*mr*l^2 + 0.4*mb*rb^2 + mb*(l-rb)^2;
 eqns = [(l-rb)*mb*(v2-v1)+ I*vr2/l == 0, vr2-v2-e*v1 == 0];
-[v2,vr2] = vpasolve(eqns, [v2 vr2]);
+[v2,vr2] = vpasolve(eqns, [v2 vr2])
 wr2 = vr2/l; %wr2: rod angular velocity after impact
 
 %Conservation of Energy
