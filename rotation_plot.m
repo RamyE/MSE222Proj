@@ -1,6 +1,6 @@
 clear, clc, clearvars
 close all
-global GlobalXYT;
+% global GlobalXYT;
 [result] = rotation(0.05,0.005,0.0125,0.06,0.09);
 figure;
 plot(result(:,1), result(:,2), 'b')

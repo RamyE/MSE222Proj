@@ -1,5 +1,6 @@
 function [result] = rotation(mb,mr,rb,l,v1)
-global GlobalXYT;
+result = [0,0,0];
+% global GlobalXYT;
 % result = [GlobalXYT(end,1), GlobalXYT(end,2)]; 
 %mb: ball mass
 %mr: rod mass
@@ -9,15 +10,17 @@ global GlobalXYT;
 %v1: ball initial velocity
 g = 9.81;
 e = 0.01; %coefficient of restitution
-x0 = GlobalXYT(end,1);
-y0 = GlobalXYT(end,2);
+% x0 = GlobalXYT(end,1);
+% y0 = GlobalXYT(end,2);
+x0 = 0.251;
+y0 = 0.2218;
 %Conservation of Momentum
 syms v2 vr2 
 %v2: ball velocity after impact with rod
 %vr2: rod velocity after impact with ball
 I = (1/3)*mr*l^2 + 0.4*mb*rb^2 + mb*(l-rb)^2;
 eqns = [(l-rb)*mb*(v2-v1)+ I*vr2/l == 0, vr2-v2-e*v1 == 0];
-[v2,vr2] = vpasolve(eqns, [v2 vr2])
+[v2,vr2] = vpasolve(eqns, [v2 vr2]);
 wr2 = vr2/l; %wr2: rod angular velocity after impact
 
 %Conservation of Energy
@@ -37,7 +40,7 @@ alpha = wr2./t1;
 x = x0 + l.*sin(theta);
 y = y0 + 2*l.*(sin(theta/2)).^2;
 
-t = GlobalXYT(end,3)+angle/wr2;
+% t = GlobalXYT(end,3)+angle/wr2;
 result = [x,y,t];
 
 end
