@@ -22,7 +22,7 @@ mass = 0.05; %mass of the ball
 global GlobalXYT;
 GlobalXYT = [initialX, initialY, 0];
 
-%EXAMPLE of how to caoncatenate to the global array a function results 
+%EXAMPLE of how to concatenate to the global array a function results 
 %         tempX = [3,6,7,0.3,0.5];
 %         tempY = [45, 45,  67, 0.3, 0.5];
 %         tempT = [0.001,0.002,0.003,0.1,2];
@@ -36,6 +36,17 @@ GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 %Horizontal Part
 horizontalResults=slope(0,0.207);
 GlobalXYT = [GlobalXYT; horizontalResults];
+%Rotation Part
+result = rotation(0.05,0.005,0.0125,0.06,0.09);
+GlobalXYT = [GlobalXYT; result];
+% [result] = rotation(0.05,0.005,0.0125,0.06,0.09);
+figure;
+plot(result(:,1), result(:,2), 'b')
+xlabel('X')
+ylabel('Y')
+% xlim([0, 100])
+% ylim([-100, 0])
+hold on
 
 % %Curvature Part
 % %The following constants are only dependent on the geometry of the design
