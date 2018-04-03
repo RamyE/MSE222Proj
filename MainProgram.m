@@ -38,7 +38,7 @@ horizontalResults=slope(0,0.198);
 GlobalXYT = [GlobalXYT; horizontalResults];
 
 % Rotation Part
-[result3] = ori_rotation(0.05,0.005,0.0125,0.06,0.3);
+[result3] = ori_rotation(mass,0.005,0.0125,0.06);
 GlobalXYT = [GlobalXYT; result3];
 
 %Freefall Part
@@ -60,10 +60,14 @@ GlobalXYT = [GlobalXYT; slopeResults];
 %Curvature Part
 %The following constants are only dependent on the geometry of the design
 theta1= -24.36;
-theta2 = 61.26;
+theta2 = 70.26;
 CurveRadius = 0.048;
 [x, y, time] = curve(theta1, theta2, CurveRadius); %function calling
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
+
+%projectile part after curvature
+projectileResults = projectile()
+GlobalXYT = [GlobalXYT; projectileResults];
 
 elapsedTime=GlobalXYT(end,3)
 figure;
@@ -75,10 +79,6 @@ title('Y wrt X')
 xlim([0,0.3048])
 ylim([0,0.3048])
 %%
-
-%projectile part after curvature
-projectileResults = projectile()
-GlobalXYT = [GlobalXYT; projectileResults];
 
 elapsedTime=GlobalXYT(end,3)
 figure;
