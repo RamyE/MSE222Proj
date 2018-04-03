@@ -1,4 +1,4 @@
-function [result]= Impact_up(angle, X, Y, global_time, c)
+function [result]= Impact_up_right(angle, X, Y, global_time, c)
 %Bounce functions are similiar to projtile function with decreasing
 %velocity after each bounce.
 %Time: The total time the ball takes to bounce in seconds
@@ -18,10 +18,8 @@ y0=Y;
 x=X;
 y=Y;
 
-
-
 % Dummy Value
-velocity=5*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
+velocity=15*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
 Vx = velocity*cos(49*(pi./180)); 
 Vy = velocity*sin(49*(pi./180));
 
@@ -45,7 +43,7 @@ while (stop == false)
         Vy = -(Vy - g*landingtime)*c;
         Vx = Vx;
         velocity=(sqrt((Vx^2) + (Vy^2))); %New bounce velocity
-        final_vel = velocity/c
+        final_vel = velocity/c;
         contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
         landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
     end
@@ -54,16 +52,6 @@ while (stop == false)
         break; %Exit the function if the contact angle become to close to slope angle.
     end
 end
-figure;
-plot(result(:,1), result(:,2), 'r')
-xlabel('X')
-ylabel('Y')
-%xlim([-30, 12])
-%ylim([-30, 12])
-title('Y versus X of Impact-up Bounce Projectile')
-grid on
-grid minor
-hold on
 end
 
 
