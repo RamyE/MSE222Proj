@@ -66,7 +66,7 @@ CurveRadius = 0.048;
 GlobalXYT = [GlobalXYT; [x, y, time]]; %adding the results to the global array
 
 %projectile part after curvature
-projectileResults = projectile()
+projectileResults = projectile();
 GlobalXYT = [GlobalXYT; projectileResults];
 
 %Impact Part

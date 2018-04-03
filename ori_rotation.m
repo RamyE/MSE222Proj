@@ -13,7 +13,7 @@ y0 = GlobalXYT(end,2);
 % x0 = 0.251;
 % y0 = 0.2218;
 %Conservation of Momentum
-v1 = (GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3))
+v1 = (GlobalXYT(end,1) - GlobalXYT(end-1,1))/(GlobalXYT(end,3) - GlobalXYT(end-1,3));
 
 syms V2 VR2
 %v2: ball velocity after impact with rod
