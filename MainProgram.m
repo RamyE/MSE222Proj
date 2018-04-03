@@ -70,9 +70,29 @@ projectileResults = projectile()
 GlobalXYT = [GlobalXYT; projectileResults];
 
 elapsedTime=GlobalXYT(end,3)
-
-
-
+figure;
+% subplot(1,2,1)
+x = GlobalXYT(:, 1);
+y = GlobalXYT(:, 2);
+plot(x, y);
+title('Y wrt X')
+xlim([0,0.3048])
+ylim([0,0.3048])
+%%
+elapsedTime=GlobalXYT(end,3)
+figure;
+subplot(1,2,1)
+x = GlobalXYT(:, 1);
+y = GlobalXYT(:, 2);
+plot(x, y);
+title('Y wrt X')
+xlim([0,0.3048])
+ylim([0,0.3048])
+subplot(1,2,2)
+v = diff(GlobalXYT(1:end,1))./ diff(GlobalXYT(1:end,3));
+vy = diff(GlobalXYT(1:end,2))./ diff(GlobalXYT(1:end,3));
+plot(v,vy)
+title('Vy wrt Vx')
 
 
 %Impact Part
