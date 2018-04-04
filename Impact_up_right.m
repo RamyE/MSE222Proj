@@ -18,16 +18,13 @@ y0=Y;
 x=X;
 y=Y;
 
-% Dummy Value
-velocity=15*c; %As the velocity calculated from the curved part is abnormally large. I will use this dummy value for the time being.
-Vx = velocity*cos(49*(pi./180)); 
-Vy = velocity*sin(49*(pi./180));
+
 
 
 
 %Real contact will be acot(vx/vy) + 2*angle, not the one below.
-contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
-landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
+bounce_angle = acot(Vx/Vy); %Contact angle change after each bounce.
+landingtime = (2*velocity*sin(bounce_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
 while (stop == false) 
     
     if (localtime <= landingtime) %This check whether or not a bounce is completed and move to a new bounce.
@@ -43,11 +40,11 @@ while (stop == false)
         Vy = -(Vy - g*landingtime)*c;
         Vx = Vx;
         velocity=(sqrt((Vx^2) + (Vy^2))); %New bounce velocity
-        final_vel = velocity/c;
-        contact_angle = acot(Vx/Vy); %Contact angle change after each bounce.
-        landingtime = (2*velocity*sin(contact_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
+        final_vel = velocity/c
+        bounce_angle = acot(Vx/Vy); %Contact angle change after each bounce.
+        landingtime = (2*velocity*sin(bounce_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
     end
-    if (contact_angle - angle) <= 0
+    if (bounce_angle - angle) <= 0
         stop = true;
         break; %Exit the function if the contact angle become to close to slope angle.
     end

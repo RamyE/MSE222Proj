@@ -19,10 +19,15 @@ g=9.81;
 
 %Solving for time 
 %Getting Complex Time with this method
+syms X
+syms Y
 syms T
-eqn= 0.5*g*T^2+( vely-0.23317*velx )*T+( y0-0.00718-0.23317*x0 )==0;
-solT=solve(eqn,T);
-time=double(solT);                  %Convert symbol to double
+eq1 = X==x0+velx*T;
+eq2 = Y==y0+vely*T+0.5*g*T^2;
+% eq3 = -.03282*(X-0.007)==.134839*(Y-.12668);
+eq3 = Y==(74.8/290)*X+.0195;
+[xCalc,yCalc,time]=solve([eq1,eq2,eq3],[X,Y,T]);
+time=double(time);                  %Convert symbol to double
 calculatedTime=time(time>0);        %Take positive time
 calculatedTime=min(calculatedTime); %Take the smallest number in the array
 
