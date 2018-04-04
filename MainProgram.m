@@ -189,11 +189,27 @@ plot(x, y);
 title('Y wrt X')
 xlim([0,0.3048])
 ylim([0,0.3048])
+xlabel('X')
+ylabel('Y')
+
 subplot(1,3,2)
-plot(time(1:end-1), sqrt(vx.^2+vy.^2))
+v = sqrt(vx.^2+vy.^2);
+v = v(~isnan(v) & isfinite(v));
+v = v(v<(mean(v)+3*std(v)));
+plot(time(1:length(v)), v)
 title('V wrt time')
+xlabel('time')
+ylabel('velocity')
+
 subplot(1,3,3)
-plot(time(1:end-2), sqrt(ax.^2+ay.^2))
+a = sqrt(ax.^2+ay.^2);
+a = a(~isnan(a) & isfinite(a));
+a = a(a<(mean(a)+3*std(a)));
+plot(time(1:length(a)), a)
+xlabel('time')
+ylabel('acceleration')
+
+
 title('a wrt time')
 
 
