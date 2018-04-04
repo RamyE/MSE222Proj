@@ -175,20 +175,29 @@ ylim([0,0.3048])
 %%
 elapsedTime=GlobalXYT(end,3)
 figure;
-subplot(1,2,1)
+x = GlobalXYT(:, 1);
+y = GlobalXYT(:, 2);
+time = GlobalXYT(:, 3);
+vx = diff(GlobalXYT(1:end,1))./ diff(GlobalXYT(1:end,3));
+vy = diff(GlobalXYT(1:end,2))./ diff(GlobalXYT(1:end,3));
+ax = diff(vx)./ diff(time(1:end-1));
+ay = diff(vy)./diff(time(1:end-1));
+subplot(1,3,1)
 x = GlobalXYT(:, 1);
 y = GlobalXYT(:, 2);
 plot(x, y);
 title('Y wrt X')
 xlim([0,0.3048])
 ylim([0,0.3048])
-subplot(1,2,2)
-v = diff(GlobalXYT(1:end,1))./ diff(GlobalXYT(1:end,3));
-vy = diff(GlobalXYT(1:end,2))./ diff(GlobalXYT(1:end,3));
-plot(v,vy)
-title('Vy wrt Vx')
+subplot(1,3,2)
+plot(time(1:end-1), sqrt(vx.^2+vy.^2))
+title('V wrt time')
+subplot(1,3,3)
+plot(time(1:end-2), sqrt(ax.^2+ay.^2))
+title('a wrt time')
 
 
+%%
 
 %Up slope impact. Debug only.
 [result2] = Impact_up_right(12, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2);
