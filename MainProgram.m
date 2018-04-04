@@ -173,7 +173,7 @@ xlim([0,0.3048])
 ylim([0,0.3048])
 
 %%
-elapsedTime=GlobalXYT(end,3)
+%elapsedTime=GlobalXYT(end,3)
 figure;
 x = GlobalXYT(:, 1);
 y = GlobalXYT(:, 2);

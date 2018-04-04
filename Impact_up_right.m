@@ -40,7 +40,7 @@ while (stop == false)
         Vy = -(Vy - g*landingtime)*c;
         Vx = Vx;
         velocity=(sqrt((Vx^2) + (Vy^2))); %New bounce velocity
-        final_vel = velocity/c
+        final_vel = velocity/c;
         bounce_angle = acot(Vx/Vy); %Contact angle change after each bounce.
         landingtime = (2*velocity*sin(bounce_angle - angle))/(g*cos(angle)); %Total time to complete 1 bounce
     end
