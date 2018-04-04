@@ -8,6 +8,8 @@ global GlobalXYT;
      %addpoints(an, GlobalXYT(i,1), GlobalXYT(i,2))
      %hold on;
      plot(GlobalXYT(i,1), GlobalXYT(i,2),'o', 'MarkerSize', 12, 'MarkerFaceColor','r')
+     xlabel('X')
+     ylabel('Y')
      %drawnow;
      axis([0 0.3048 0 0.3048]); %has to be changed
      pause((GlobalXYT(i,3)-GlobalXYT(i-1,3)));

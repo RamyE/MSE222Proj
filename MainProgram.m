@@ -186,7 +186,7 @@ subplot(1,3,1)
 x = GlobalXYT(:, 1);
 y = GlobalXYT(:, 2);
 plot(x, y);
-title('Y wrt X')
+title('Y vs X')
 xlim([0,0.3048])
 ylim([0,0.3048])
 xlabel('X')
@@ -197,24 +197,17 @@ v = sqrt(vx.^2+vy.^2);
 v = v(~isnan(v) & isfinite(v));
 v = v(v<(mean(v)+3*std(v)));
 plot(time(1:length(v)), v)
-title('V wrt time')
-xlabel('time')
-ylabel('velocity')
+title('V vs Time')
+xlabel('Time')
+ylabel('Velocity')
 
 subplot(1,3,3)
 a = sqrt(ax.^2+ay.^2);
 a = a(~isnan(a) & isfinite(a));
 a = a(a<(mean(a)+3*std(a)));
 plot(time(1:length(a)), a)
-xlabel('time')
-ylabel('acceleration')
+xlabel('Time')
+ylabel('Acceleration')
 
 
-title('a wrt time')
-
-
-%%
-
-%Up slope impact. Debug only.
-[result2] = Impact_up_right(12, GlobalXYT(end,1),GlobalXYT(end,2), GlobalXYT(end,3),0.2);
-GlobalXYT = [GlobalXYT; result2];
+title('a vs Time')
