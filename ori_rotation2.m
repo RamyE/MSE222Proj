@@ -41,7 +41,7 @@ omegaF =[];
 tF = 0;
 for i = 2:length(theta)
     syms OM;
-    eqn = [0.7*mb*((v2^2))+(0.5*Ir*(wr2^2))-mr*y1*g == (-mr*y1*g*cos(theta(i))+ 0.7*mb*(((l-rb)*(OM)).^2)+(0.5*Ir*(OM.^2)))];
+    eqn = [0.7*mb*((v2^2))+(0.5*Ir*(wr2^2))- mr*y1*g-mb*(l-rb)*g == (-mr*y1*g*cos(theta(i))-(mb*(l-rb)*g*cos(theta(i)))+ 0.7*mb*(((l-rb)*(OM)).^2)+(0.5*Ir*(OM.^2)))];
     omega = solve(eqn, OM);
     omegad = double(omega);
     omegad = omegad(omegad>0);
@@ -53,6 +53,16 @@ end
 %t = theta ./ omegaF;
 figure;
 plot(tF(1:end-1), omegaF, 'b')
+xlabel('Time (s)');
+ylabel('Angular Velocity (rad/s)');
+% hold on
+
+tF_transpose = tF(1:end-1)';
+alpha = diff(omegaF(:))./diff(tF_transpose);
+figure;
+plot(tF(1:end-1), alpha, 'r')
+xlabel('Time (s)');
+ylabel('Angular Acceleration (rad^2/s)');
 % wr2 = 0 -;
 % alpha = wr2./t;
 

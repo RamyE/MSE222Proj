@@ -1,4 +1,3 @@
-
 clear global;
 close all;
 clc
