@@ -1,4 +1,3 @@
-
 clear global;
 close all;
 clc
@@ -12,7 +11,7 @@ initialXafterSpring = 0.0475; %the actual value from left - Value after the spri
 SE = initialXafterSpring;
 initialX = 0.0445; %assuming compression of 3.5 millimetres
 initialY = 0.2435; %The actual value from the bottom in the prototype
-springK = 126;  %I don't what is its range or expected value
+springK = 150;  %I don't what is its range or expected value
 % springS = 0.035; %the difference between the spring equilibrium and the compression (compression length is S)
 mass = 0.0207; %mass of the ball
 coeffE = 0.16;
@@ -48,7 +47,7 @@ plot(GlobalXYT(end,1), GlobalXYT(end,2), 'O', 'MarkerSize', 8, 'MarkerFaceColor'
 hold on;
 
 % Rotation Part
-[result3] = ori_rotation(mass,0.005,0.0125,0.06);
+[result3] = ori_rotation2(mass,0.0025,0.0125,0.06);
 GlobalXYT = [GlobalXYT; result3];
 
 %Draw Separator
