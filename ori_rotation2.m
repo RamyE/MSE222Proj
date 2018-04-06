@@ -7,7 +7,7 @@ global GlobalXYT;
 %d: horizontal bar length
 %v1: ball initial velocity
 g = 9.81;
-e = 0.10; %coefficient of restitution
+e = 0.1; %coefficient of restitution
 x0 = GlobalXYT(end,1);
 y0 = GlobalXYT(end,2);
 % x0 = 0.251;
@@ -29,15 +29,20 @@ wr2 = vr2/(l-rb); %wr2: rod angular velocity after impact
 y1 = (mr*(l/2) + 0*(l-rb))/(mr + 0);
 % y2 = y1 * cos(angle);
 %(mb+mr)*g*y1*(1-cos(angle)) == 0.5*(mb*v2^2+I*wr2^2);
-cos_of_angle = (1-(0.5*(mb*(v2^2)+I*(wr2^2)))/((0+mr)*g*y1));
-angle = acos(cos_of_angle);
+syms anglee
+eqanglee = 0.7*mb*((v2^2))+(0.5*Ir*(wr2^2))-mr*y1*g == -mr*y1*g*cos(anglee)+ 0.7*mb*((l-rb)*0)+(0.5*Ir*0);
+angle = solve(eqanglee, anglee);
+angle = double(angle);
+angle = degtorad(24);
+% angle = acos(cos_of_angle);
 
-theta = 0:0.01:angle;
+theta = 0:0.001:angle;
 omegaF =[];
 tF = 0;
 for i = 2:length(theta)
     syms OM;
-    eqn = [0.5*mb*((v2^2))+(0.5*Ir*(wr2^2))-mr*y1*g == (-mr*y1*g*cos(theta(i))+ 0.5*mb*((l-rb)*(OM.^2))+(0.5*Ir*(OM.^2)))];
+    %0.7*mb*((v2^2))+   -mb*(l-rb)*g                          -mb*(l-rb)*g*cos(theta(i))    0.7*mb*(((l-rb)*(OM)).^2)
+    eqn = [0.7*mb*((v2^2))+(0.5*Ir*(wr2^2))- mr*y1*g == (-mr*y1*g*cos(theta(i))+  0.7*mb*((v2^2))  +(0.5*Ir*(OM.^2)))];
     omega = solve(eqn, OM);
     omegad = double(omega);
     omegad = omegad(omegad>0);
@@ -46,8 +51,18 @@ for i = 2:length(theta)
     tF = [tF, tF(end)+timee];
 end
 
+%t = theta ./ omegaF;
 
-t = theta ./ omegaF;
+figure;
+plot(tF(1:end-1), omegaF, 'b');
+xlabel('Time (s)');
+ylabel('Angular Velocity (rad/s)');
+
+figure;
+alphaF = diff(omegaF)./diff(tF(1:length(omega))');
+plot(tF(1:length(alphaF)), alphaF, 'r')
+xlabel('Time (s)');
+ylabel('Angular Acceleration (rad/s^2)');
 % wr2 = 0 -;
 % alpha = wr2./t;
 
@@ -56,10 +71,10 @@ t = theta ./ omegaF;
 % ay = (l-rb).*alpha.*sin(theta/2); %ay: vertical acceleration after impact
 % y = y0 + 0.5*(-ay-g).*(t.^2);
 
-% x = x0 + l.*sin(theta);
-% y = y0 + 2*l.*(sin(theta/2)).^2;
-% time = GlobalXYT(end,3)+ t;
-% 
+x = x0 + l.*sin(theta);
+y = y0 + 2*l.*(sin(theta/2)).^2;
+time = GlobalXYT(end,3)+ tF;
+
 result3 = [x' y' time'];
 % 
 % hold on
