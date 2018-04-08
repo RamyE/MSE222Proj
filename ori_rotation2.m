@@ -39,6 +39,8 @@ angle = degtorad(24);
 theta = 0:0.001:angle;
 omegaF =[];
 tF = 0;
+x = 0;
+y = 0;
 for i = 2:length(theta)
     syms OM;
     %0.7*mb*((v2^2))+   -mb*(l-rb)*g                          -mb*(l-rb)*g*cos(theta(i))    0.7*mb*(((l-rb)*(OM)).^2)
@@ -46,10 +48,12 @@ for i = 2:length(theta)
     omega = solve(eqn, OM);
     omegad = double(omega);
     omegad = omegad(omegad>0);
-    timee = (theta(i)-theta(i-1)) / omegad;
+    timee = (theta(i)-theta(i-1)) ./ omegad;
     omegaF = [omegaF; omegad];
+    x = [x0; x0 + l.*sin(theta(i)-theta(i-1))];
+    y = [y0; y0 + 2*l.*(sin((theta(i)-theta(i-1))/2)).^2];
     tF = [tF, tF(end)+timee];
-end
+end 
 
 %t = theta ./ omegaF;
 
@@ -63,19 +67,15 @@ alphaF = diff(omegaF)./diff(tF(1:length(omega))');
 plot(tF(1:length(alphaF)), alphaF, 'r')
 xlabel('Time (s)');
 ylabel('Angular Acceleration (rad/s^2)');
-% wr2 = 0 -;
-% alpha = wr2./t;
 
 % ax = (l-rb).*alpha.*cos(theta/2); %ax: horizontal acceleration after impact
 % x = x0 + v2.*t + 0.5.*ax.*(t.^2);
 % ay = (l-rb).*alpha.*sin(theta/2); %ay: vertical acceleration after impact
 % y = y0 + 0.5*(-ay-g).*(t.^2);
 
-x = x0 + l.*sin(theta);
-y = y0 + 2*l.*(sin(theta/2)).^2;
 time = GlobalXYT(end,3)+ tF;
 
-result3 = [x' y' time'];
+result3 = [x y time];
 % 
 % hold on
 % figure;
